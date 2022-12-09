@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Reminder</title>
+{% endblock %}
+
+
+{% block body %} 
+
+
+<div class="container d-flex align-items-center justify-content-center">
+  <form action="/" method="POST">
+    <div class="mt-3">
+      <label for="desc" class="form-label">Reminder Description</label>
+      <textarea
+        class="form-control"
+        id="content"
+        rows="3"
+        placeholder="Write Your Reminder Here."
+        name="content"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-dark mt-4">Add Reminder</button>
+  </form>
+</div>
+
+
+<div class="cont">
+    
+    {% if tasks|length==0 %}
+    <h3>No Reminders for now!</h3>
+    {% else %} 
+<table>
+        <tr>
+<th>Reminder</th>
+<th>Date Created</th>
+<th>Actions</th>
+    </tr>
+
+    {% for task in tasks%}
+    <tr>
+        <td>{{task.content}}</td>
+        <td>{{task.dateCreated.date()}}</td>
+<td>
+    <a href="/delete/{{task.id}}" class="del">Delete</a><br/>
+    <a href="/update/{{task.id}}" class="upd">Update</a>
+</td>
+    </tr>
+
+    {% endfor %}
+    {% endif %}
+</table>
+
+
+{% endblock %}
